@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 def damn(request, *args, **kwargs):
     # the root page is where the user loggs in or registers their account.
-    return render(request, 'base.html', {})
+    return render(request, 'welcome.html', {})
 
 
 def home_view(request, *args, **kwargs):
@@ -13,14 +13,14 @@ def home_view(request, *args, **kwargs):
 
 def search_view(request, *args, **kwargs):
     # this is where the user can search for a rescue animal.
-    return render()
+    return render(request, 'search.html', {})
 
 
-def put_view(request, *args, **kwargs):
+def post_view(request, *args, **kwargs):
     # this is where the user can put a rescue animal for adoption.
-    return render()
+    return render(request, 'post.html', {})
 
 
 def about_view(request, *args, **kwargs):
     # about page.
-    return render()
+    return render(request, 'about.html', {})
