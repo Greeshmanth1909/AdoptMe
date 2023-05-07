@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 def damn(request, *args, **kwargs):
     # the root page is where the user loggs in or registers their account.
-    return render(request, 'welcome.html', {})
+    return render(request, 'base.html', {})
 
 
 def home_view(request, *args, **kwargs):
