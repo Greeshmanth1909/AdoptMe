@@ -8,5 +8,11 @@ def login_view(request, *args, **kwargs):
 
 
 def registration_view(request, *args, **kwargs):
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
     form = UserCreationForm()
     return render(request, 'registration/registration.html', {'form': form})
