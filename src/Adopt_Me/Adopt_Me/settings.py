@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Adopt_Me.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/Users/geechu/Desktop/FinalProject/src/Adopt_Me/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
