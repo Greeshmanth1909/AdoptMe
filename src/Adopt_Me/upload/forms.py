@@ -6,4 +6,3 @@ class upload_form(forms.Form):
     animal = forms.CharField()
     image = forms.ImageField()
     description = forms.CharField()
-    
