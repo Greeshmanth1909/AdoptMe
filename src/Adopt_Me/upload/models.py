@@ -4,5 +4,5 @@ from django.db import models
 
 class upload_img(models.Model):
     animal = models.CharField(max_length=15)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images')
     description = models.CharField(max_length=200)
