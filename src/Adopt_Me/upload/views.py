@@ -16,7 +16,7 @@ def upload_view(request, *args, **kwargs):
             user_img =  models.upload_img(animal=animal, image=image, description=description)
             user_img.save()
             messages.success(request, 'upload successful')
-            return redirect('')
+            return redirect('upload/success.html')
     else:
         form = forms.upload_form()
         return render(request, 'upload/upload.html', {'form': form})
