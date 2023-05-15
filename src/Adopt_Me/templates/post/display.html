@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {%  for item in data %}
+        <ul>
+            <li>{{ item.animal }}</li>
+            <img src="{{ item.image.url }}" alt="Image">
+            <li>{{ item.location }}</li>
+            <li>{{ item.description }}</li>
+        </ul>
+    {% endfor %}
+{%  endblock %}
