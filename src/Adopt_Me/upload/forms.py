@@ -6,6 +6,6 @@ from .models import upload_img
 class upload_img_form(ModelForm):
     class Meta:
         model = upload_img
-        fields = '__all__'
+        exclude = ['user', 'dateTime', 'adopted']
 
 

@@ -3,9 +3,12 @@
 {% block content %}
     {%  for item in data %}
         <ul>
+            <li>{{ item.user }}</li>
+            <li>{{ item.dateTime }}</li>
             <li>{{ item.animal }}</li>
             <img src="{{ item.image.url }}" alt="Image">
             <li>{{ item.location }}</li>
+            <li>{{ item.adopted }}</li>
             <li>{{ item.description }}</li>
         </ul>
     {% endfor %}
