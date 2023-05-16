@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if total_posts != 0 %}
+        {% for post in post_archieve %}
+            <div>
+            <li>{{ post.user }}</li>
+            <li>{{ post.dateTime }}</li>
+            <li>{{ post.animal }}</li>
+            <img src="{{ post.image.url }}" alt="Image">
+            <li>{{ post.location }}</li>
+            <li>{{ post.adopted }}</li>
+            <li>{{ post.description }}</li>
+            </div>
+        {% endfor %}
+    {% else %}
+            <div>
+                <h1>No posts yet!</h1>
+            </div>
+    {% endif %}
+
+{% endblock %}
