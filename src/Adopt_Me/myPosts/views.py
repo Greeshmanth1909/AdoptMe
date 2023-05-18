@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from upload import models
+from django.shortcuts import render, get_object_or_404, redirect
+from upload import models, forms
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -12,3 +12,17 @@ def my_post_view(request, *args, **kwargs):
     context['total_posts'] = len(post_archieve)
     context['post_archieve'] = post_archieve
     return render(request, 'user_posts/user_posts.html', context)
+
+
+@login_required
+def edit_view(request, post_id):
+    post = get_object_or_404(models.upload_img, id=post_id)
+
+    if request.method == "POST":
+        form = forms.upload_img_form(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('/my posts/')
+    else:
+        form = forms.upload_img_form(instance=post)
+        return render(request, 'post/editPost.html', {'form': form})
