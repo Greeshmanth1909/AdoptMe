@@ -29,4 +29,5 @@ urlpatterns = [
     path('', include('upload.urls')),
     path('', include('data.urls')),
     path('', include('myPosts.urls')),
+    path('', include('chat.urls')),
 ]
