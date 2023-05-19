@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'upload',
     'data',
     'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
