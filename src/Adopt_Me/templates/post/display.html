@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     {%  for item in data %}
         <div>
             
@@ -12,6 +13,9 @@
                 <li>{{ item.location }}</li>
                 <li>{{ item.adopted }}</li>
                 <li>{{ item.description }}</li>
+                {% if item.user != user %}
+                    <li><a href="/chats/{{ item.user }}_chat/">Chat</a></li>
+                {% endif %}
             </ul>
             
         </div>
