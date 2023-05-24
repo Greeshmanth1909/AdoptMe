@@ -13,11 +13,7 @@ def chat_view(request, *args, **kwargs):
 # this view handles dms.
 
 def dm_view(request, username):
-    print(username)
-    print(request.user)
-    if username == request.user:
-        messages.success(request, "Cant talk to yourself!")
-        return redirect('search')
-    else:
-        messages.success(request, "Welcome to chat!")
-        return render(request, 'chat/dm.html', {})
+    messages.success(request, "Welcome to chat!")
+    # get existing chats from db, if any.
+    # display them in the standard fashion.
+    return render(request, 'chat/dm.html', {})
