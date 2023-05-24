@@ -9,3 +9,4 @@ class DirectMessages(models.Model):
     message = models.TextField()
     time = models.TimeField()
     date = models.DateField()
+

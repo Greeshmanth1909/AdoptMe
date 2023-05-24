@@ -1,7 +1,27 @@
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for message in old_messages %}
+        {% if message.sender == sender %}
+            <!-- msgs form self -->
+            <div>
+                <p>
+                    {{message.message}}
+                </p>
+            </div>
+
+        {% else %}
+            <!-- to the left -->
+            <div>
+                <h1>
+                    {{message.message}}
+                </h1>
+            </div>
+        {% endif %}
     {% endfor %}
-</ul>
-{% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
+{% endblock %}
