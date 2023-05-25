@@ -2,7 +2,8 @@
 
 {% block content %}
     {% for message in old_messages %}
-        {% if message.sender == sender %}
+    <p>{{ message.sender }}</p>
+        {% if message.sender == user %}
             <!-- msgs form self -->
             <div>
                 <p>
