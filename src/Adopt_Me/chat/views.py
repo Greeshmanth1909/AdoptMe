@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import DirectMessages
 from .forms import SendMessage
 from django.contrib.auth.models import User
+from datetime import date, datetime
 
 # Create your views here.
 def chat_view(request, *args, **kwargs):
@@ -17,11 +18,10 @@ def chat_view(request, *args, **kwargs):
 
 def dm_view(request, username):
 
-    messages.success(request, "Welcome to chat!")
 
     # get existing chats from db, if any.
     sender = request.user
-    receiver = User.objects.filter()
+    receiver = User.objects.get(username=username)
     old_messages = (DirectMessages.objects.filter(sender=sender) | DirectMessages.objects.filter(receiver=receiver)).order_by('date', 'time')
     context = dict()
     context['sender'] = sender
@@ -35,6 +35,10 @@ def dm_view(request, username):
     else:
         form = SendMessage(request.POST)
         if form.is_valid():
+            form.instance.sender = request.user
+            form.instance.receiver = receiver
+            form.instance.date = date.today()
+            form.instance.time = datetime.now()
+            context['form'] = form
             form.save()
-            render(request, 'chat/dm.html', context)
-    return render(request, 'chat/dm.html', context)
+            return render(request, 'chat/dm.html', context)
