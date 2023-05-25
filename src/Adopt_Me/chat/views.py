@@ -18,21 +18,17 @@ def chat_view(request, *args, **kwargs):
 
 
 # this view handles dms.
-
 def dm_view(request, username):
 
     # get existing chats from db, if any.
     sender = request.user
     receiver = User.objects.get(username=username)
-    print(receiver)
-    print(sender)
     old_messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time')
     context = dict()
     context['sender'] = sender
     context['receiver'] = receiver
     context['old_messages'] = old_messages
     context['user'] = request.user
-    print(old_messages)
     # enable text field and send button
     if request.method == 'GET':
         form = SendMessage()
