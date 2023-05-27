@@ -5,15 +5,20 @@ from .models import DirectMessages
 from .forms import SendMessage
 from django.contrib.auth.models import User
 from datetime import date, datetime
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def chat_view(request, *args, **kwargs):
     # chat stuff here
     context = dict()
-
-    # get list of all chats of user here
-    recent_contacts = DirectMessages.objects.filter(sender=request.user) | DirectMessages.objects.filter(receiver=request.user)
-    
+    recent_chats_set = set()
+    # get messages from db where logged in user is a sender and add the receiver members to a set
+    recent_chats1 = set(DirectMessages.objects.filter(sender=request.user).values_list('receiver', flat=True))
+    # same but the other way around.
+    recent_chats2 = set(DirectMessages.objects.filter(receiver=request.user).values_list('sender', flat=True))
+    recent_chats_list = list(recent_chats1.union(recent_chats2))
+    current_users = [get_user_model().objects.get(id=user_id) for user_id in recent_chats_list]
+    context['users'] = current_users
     return render(request, 'chat/chatHome.html', context)
 
 

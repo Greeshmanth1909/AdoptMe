@@ -3,4 +3,11 @@
 {% block content %}
     <h1>My Chats</h1>
     <!-- link to personal chat -->
+    <div>
+        {% for user in users %}
+            <div>
+                <a href="/chats/{{ user }}_chat/" >{{ user }}</a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
