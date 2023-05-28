@@ -10,4 +10,14 @@ class ChatConsumer(AsyncConsumer):
 
     async def connect(self):
         self.username = self.scope['url_route']['kwargs']['username']
-    pass
+        await self.accept()
+
+        await self.send(text_data=json.dumps({
+            'message': 'connection successful'
+        }))
+
+    async def disconnect(self):
+        pass
+
+    async def receive(self, text_data):
+        pass
