@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
+ <div>
+    <h1 id="receiver">{{ receiver }}</h1>
+ </div>
     {% for message in old_messages %}
     <p>{{ message.sender }}</p>
         {% if message.sender == user %}
@@ -21,9 +26,18 @@
         {% endif %}
     {% endfor %}
 
-    <form method="post">
+    <form method="post" id="chat-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Send</button>
     </form>
+
+    <script>
+        const username = document.getElementById('receiver').innerHTML
+        console.log(username);
+        let ws_url = `ws://127.0.0.1:8000/chats/${username}_chat/`
+        console.log(ws_url);
+        const socket = new WebSocket('ws://127.0.0.1:8000/chats/username_chat/$')
+        
+    </script>
 {% endblock %}
