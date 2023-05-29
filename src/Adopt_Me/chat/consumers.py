@@ -2,22 +2,20 @@ import asyncio
 import json
 from django.contrib.auth import get_user_model
 from channels.consumer import AsyncConsumer
-from django.db import database_sync_to_async
-from .models import Thread, ChatMessage
+from channels.generic.websocket import WebsocketConsumer
 
 
-class ChatConsumer(AsyncConsumer):
 
-    async def connect(self):
-        self.username = self.scope['url_route']['kwargs']['username']
-        await self.accept()
+class ChatConsumer(WebsocketConsumer):
 
-        await self.send(text_data=json.dumps({
-            'message': 'connection successful'
-        }))
+    def connect(self):
+        self.accept()
+        text = 'hello ws'
+        jsontxt = {
+            'text': text
+        }
+        self.send(json.dumps(jsontxt))
 
-    async def disconnect(self):
-        pass
 
-    async def receive(self, text_data):
+    def disconnect(self, code):
         pass

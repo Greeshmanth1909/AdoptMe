@@ -35,9 +35,26 @@
     <script>
         const username = document.getElementById('receiver').innerHTML
         console.log(username);
-        let ws_url = `ws://127.0.0.1:8000/chats/${username}_chat/`
+        let ws_url = `ws://127.0.0.1:8000/ws/chats/${username}/`
         console.log(ws_url);
-        const socket = new WebSocket('ws://127.0.0.1:8000/chats/username_chat/$')
+        const socket = new WebSocket(ws_url);
         
+        socket.onopen = function hello(){
+            console.log("connection successfull!")
+        }
+
+        socket.onmessage = function msg(event){
+            var data = JSON.parse(event.data);
+            console.log(data);
+        }
+
+        socket.onclose = function close(){
+            console.log("connection closed");
+        }
+
+        socket.onerror = function err(){
+            console.log("an unexpected error occured..")
+        }
+
     </script>
 {% endblock %}

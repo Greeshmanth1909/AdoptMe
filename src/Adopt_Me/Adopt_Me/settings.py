@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'members',
     'upload',
     'data',
-    'channels',
     'chat',
 ]
 
