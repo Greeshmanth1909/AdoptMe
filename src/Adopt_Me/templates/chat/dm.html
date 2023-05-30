@@ -5,6 +5,7 @@
 {% block content %}
  <div>
     <h1 id="receiver">{{ receiver }}</h1>
+    <!-- <p hidden id="sender">{{ message.sender }}</p> -->
  </div>
     {% for message in old_messages %}
     <p>{{ message.sender }}</p>
@@ -33,10 +34,11 @@
     </form>
 
     <script>
-        const username = document.getElementById('receiver').innerHTML
-        console.log(username);
-        let ws_url = `ws://127.0.0.1:8000/ws/chats/${username}/`
-        console.log(ws_url);
+        const receiver = "{{ receiver }}"
+        const sender = "{{ sender }}"
+
+        let ws_url = `ws://127.0.0.1:8000/ws/chats/${receiver}/`
+
         const socket = new WebSocket(ws_url);
         
         let form_text_data = document.getElementById("chat-form");
@@ -72,7 +74,9 @@
             const messageInput = messageInputDom.value;
 
             socket.send(JSON.stringify({
-                'message': messageInput
+                'message': messageInput,
+                'sender': sender,
+                'receiver': receiver,
             }));
             messageInputDom.value = '';
         };
