@@ -15,7 +15,16 @@ class ChatConsumer(WebsocketConsumer):
             'text': text
         }
         self.send(json.dumps(jsontxt))
+        print('hello world')
+
+
+    def receive(self, text_data=None, bytes_data=None):
+        msg = json.loads(text_data)
+        self.process(msg)
 
 
     def disconnect(self, code):
         pass
+
+    def process(self, data):
+        print(data)

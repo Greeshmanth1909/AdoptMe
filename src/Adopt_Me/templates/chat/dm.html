@@ -29,7 +29,7 @@
     <form method="post" id="chat-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Send</button>
+        <button type="submit" id="send_msg">Send</button>
     </form>
 
     <script>
@@ -39,8 +39,18 @@
         console.log(ws_url);
         const socket = new WebSocket(ws_url);
         
+        let form_text_data = document.getElementById("chat-form");
+        let input = document.getElementById("id_message");
+
+        document.querySelector("#chat-form").addEventListener('submit', function (e) {
+            e.preventDefault();
+            console.log(input.value);
+        });
+
         socket.onopen = function hello(){
-            console.log("connection successfull!")
+            console.log("connection successfull!");
+            console.log("#chat-form");
+
         }
 
         socket.onmessage = function msg(event){
@@ -55,6 +65,17 @@
         socket.onerror = function err(){
             console.log("an unexpected error occured..")
         }
+
+
+        document.querySelector("#send_msg").onclick = function(e){
+            const messageInputDom = document.querySelector("#id_message");
+            const messageInput = messageInputDom.value;
+
+            socket.send(JSON.stringify({
+                'message': messageInput
+            }));
+            messageInputDom.value = '';
+        };
 
     </script>
 {% endblock %}
