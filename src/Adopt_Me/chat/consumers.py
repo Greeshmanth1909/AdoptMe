@@ -6,6 +6,7 @@ from channels.generic.websocket import WebsocketConsumer
 from .models import DirectMessages
 from django.contrib.auth.models import User
 from datetime import date, datetime
+from channels.db import database_sync_to_async
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -41,3 +42,11 @@ class ChatConsumer(WebsocketConsumer):
         message.date = date.today()
         message.save()
         print("save successful")
+
+        @database_sync_to_async
+        def message(self):
+            # query db
+            messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | 
+                        DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time').values_list('message', 'sender', flat=True)
+            
+            pass

@@ -76,6 +76,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Adopt_Me.wsgi.application'
 ASGI_APPLICATION = 'Adopt_Me.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 
 # Database

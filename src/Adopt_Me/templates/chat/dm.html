@@ -37,6 +37,12 @@
         const receiver = "{{ receiver }}"
         const sender = "{{ sender }}"
 
+        const id1 = "{{ id1 }}"
+        const id2 = "{{ id2 }}"
+
+        console.log(id1);
+        console.log(id2);
+
         let ws_url = `ws://127.0.0.1:8000/ws/chats/${receiver}/`
 
         const socket = new WebSocket(ws_url);

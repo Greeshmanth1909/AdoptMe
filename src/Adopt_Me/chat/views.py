@@ -29,11 +29,16 @@ def dm_view(request, username):
     sender = request.user
     receiver = User.objects.get(username=username)
     old_messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time')
+    chat_id_ref = old_messages.first()
+    chat_id_ref1 = chat_id_ref.sender
+    chat_id_ref2 = chat_id_ref.receiver
     context = dict()
     context['sender'] = sender
     context['receiver'] = receiver
     context['old_messages'] = old_messages
     context['user'] = request.user
+    context['id1'] = chat_id_ref1
+    context['id2'] = chat_id_ref2
     # enable text field and send button
     if request.method == 'GET':
         form = SendMessage()
