@@ -43,7 +43,7 @@
         console.log(id1);
         console.log(id2);
 
-        let ws_url = `ws://127.0.0.1:8000/ws/chats/${receiver}/`
+        let ws_url = `ws://127.0.0.1:8000/ws/chats/${id1}_${id2}/`
 
         const socket = new WebSocket(ws_url);
         
