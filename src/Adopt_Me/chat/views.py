@@ -33,7 +33,7 @@ def dm_view(request, username):
 
     # dumb way to ensure a newly created chat doesnt crash the server..
     if len(old_messages) == 0:
-        chat = DirectMessages(sender=request.user, receiver=receiver, message='', date=date.today(), time=datetime.now())
+        chat = DirectMessages(sender=request.user, receiver=receiver, message=' welcome to chat!', date=date.today(), time=datetime.now())
         chat.save()
         old_messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time')
 

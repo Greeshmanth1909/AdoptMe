@@ -24,10 +24,7 @@ class ChatConsumer(WebsocketConsumer):
         )
 
         self.accept()
-        text = {
-            'text': "success!"
-        }
-        self.send(json.dumps(text))
+        
 
     def receive(self, text_data=None, bytes_data=None):
         msg = json.loads(text_data)
