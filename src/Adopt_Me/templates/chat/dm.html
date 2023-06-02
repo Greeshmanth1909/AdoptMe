@@ -31,7 +31,7 @@
     <form method="post" id="chat-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" id="send_msg">Send</button>
+        <button type="submit" id="send_msg" class="btn btn-outline-dark">Send</button>
     </form>
 
     <script>
