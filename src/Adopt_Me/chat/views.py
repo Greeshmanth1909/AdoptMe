@@ -28,10 +28,19 @@ def dm_view(request, username):
     # get existing chats from db, if any.
     sender = request.user
     receiver = User.objects.get(username=username)
+
     old_messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time')
+
+    # dumb way to ensure a newly created chat doesnt crash the server..
+    if len(old_messages) == 0:
+        chat = DirectMessages(sender=request.user, receiver=receiver, message='', date=date.today(), time=datetime.now())
+        chat.save()
+        old_messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time')
+
     chat_id_ref = old_messages.first()
     chat_id_ref1 = chat_id_ref.sender
     chat_id_ref2 = chat_id_ref.receiver
+
     context = dict()
     context['sender'] = sender
     context['receiver'] = receiver
@@ -39,11 +48,13 @@ def dm_view(request, username):
     context['user'] = request.user
     context['id1'] = chat_id_ref1
     context['id2'] = chat_id_ref2
+
     # enable text field and send button
     if request.method == 'GET':
         form = SendMessage()
         context['form'] = form
         return render(request, 'chat/dm.html', context)
+    
     else:
         form = SendMessage(request.POST)
         if form.is_valid():

@@ -7,22 +7,40 @@ from .models import DirectMessages
 from django.contrib.auth.models import User
 from datetime import date, datetime
 from channels.db import database_sync_to_async
+from asgiref.sync import async_to_sync
 
 
 class ChatConsumer(WebsocketConsumer):
 
     def connect(self):
-        self.accept()
-        text = 'hello ws'
-        jsontxt = {
-            'text': text
-        }
-        self.send(json.dumps(jsontxt))
-        print('hello world')
 
+        self.id1 = self.scope["url_route"]["kwargs"]["id1"]
+        self.id2 = self.scope["url_route"]["kwargs"]["id2"]
+
+        # assigning unique group id
+        self.chat_id = f"chat_{self.id1 + self.id2}"
+        async_to_sync(self.channel_layer.group_add)(
+            self.chat_id, self.channel_name
+        )
+
+        self.accept()
+        text = {
+            'text': "success!"
+        }
+        self.send(json.dumps(text))
 
     def receive(self, text_data=None, bytes_data=None):
         msg = json.loads(text_data)
+
+        # echo message to the group
+        sender = msg['sender']
+        message = msg['message']
+
+        async_to_sync(self.channel_layer.group_send)(
+            self.chat_id, {'type': 'chat_message',
+                           'sender': sender, 
+                           'message': message,}
+        )
         self.process(msg)
 
 
@@ -43,10 +61,10 @@ class ChatConsumer(WebsocketConsumer):
         message.save()
         print("save successful")
 
-        @database_sync_to_async
-        def message(self):
-            # query db
-            messages = (DirectMessages.objects.filter(sender=sender, receiver=receiver) | 
-                        DirectMessages.objects.filter(sender=receiver, receiver=sender)).order_by('date', 'time').values_list('message', 'sender', flat=True)
-            
-            pass
+
+    def chat_message(self, event):
+        message = event["message"]
+        sender = event["sender"]
+
+        # Send message to WebSocket
+        self.send(text_data=json.dumps({"message": message, "sender": sender}))

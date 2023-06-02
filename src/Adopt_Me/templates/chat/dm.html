@@ -7,8 +7,8 @@
     <h1 id="receiver">{{ receiver }}</h1>
     <!-- <p hidden id="sender">{{ message.sender }}</p> -->
  </div>
-    {% for message in old_messages %}
-    <p>{{ message.sender }}</p>
+    <div id="chatroom">
+        {% for message in old_messages %}
         {% if message.sender == user %}
             <!-- msgs form self -->
             <div>
@@ -26,6 +26,7 @@
             </div>
         {% endif %}
     {% endfor %}
+    </div>
 
     <form method="post" id="chat-form">
         {% csrf_token %}
@@ -64,6 +65,25 @@
         socket.onmessage = function msg(event){
             var data = JSON.parse(event.data);
             console.log(data);
+            const div = document.getElementById("chatroom");
+            if (data.sender == "{{ user }}") {
+                // shift to right
+                console.log("user sent the message..");
+                const para = document.createElement("p");
+                const node = document.createTextNode(data.message);
+
+                para.appendChild(node);
+                div.appendChild(para);
+
+            } else {
+                // shift to left
+                console.log("nahh");
+                const head = document.createElement("h1");
+                const node = document.createTextNode(data.message);
+
+                head.appendChild(node);
+                div.appendChild(head);
+            }
         }
 
         socket.onclose = function close(){
