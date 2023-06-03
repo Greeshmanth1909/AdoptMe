@@ -107,5 +107,13 @@
             messageInputDom.value = '';
         };
 
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                document.getElementById('send_msg').click();
+                
+            }
+            });
+
+
     </script>
 {% endblock %}
