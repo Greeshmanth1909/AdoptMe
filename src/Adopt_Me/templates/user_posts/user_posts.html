@@ -1,24 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if total_posts != 0 %}
-        {% for post in post_archieve %}
-            <div>
-            <li>{{ post.user }}</li>
-            <li>{{ post.dateTime }}</li>
-            <li>{{ post.animal }}</li>
-            <img src="{{ post.image.url }}" alt="Image">
-            <li>{{ post.location }}</li>
-            <li>{{ post.adopted }}</li>
-            <li>{{ post.description }}</li>
-            <li><a href="{% url 'edit' post_id=post.id %}">Edit post</a></li>
-            
-            </div>
-        {% endfor %}
-    {% else %}
-            <div>
-                <h1>No posts yet!</h1>
-            </div>
-    {% endif %}
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+            {% if total_posts != 0 %}
+                {% for post in post_archieve %}
+                    <div class="col">
+                        
+                        <div class="card mt-3 mb-3">
+                            <ul class="list-group">
+                                <li class="list-group-item badge text-bg-light">{{ post.user }}</li>
+                                <li class="list-group-item">{{ post.dateTime }}</li>
+                                <li class="list-group-item">{{ post.animal }}</li>
+                                <img src="{{ post.image.url }}" class="card-img-top" alt="Image">
+                                <li class="list-group-item">{{ post.location }}</li>
+                                <li class="list-group-item">{{ post.adopted }}</li>
+                                <li class="list-group-item">
+                                <button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Description
+                                </button>
+                                <br>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        {{ post.description }}
+                                    </div>
+                                  </div>
+                                </li>
+                            <li class="list-group-item"><a href="{% url 'edit' post_id=post.id %}" class="btn btn-outline-dark">Edit post</a></li>
+                            </ul>
+                            
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <div>
+                        <h1>No posts yet!</h1>
+                    </div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
