@@ -51,7 +51,19 @@
                   <a class="nav-link" href="/about" id="about">About</a>
                 </li>
                 <li>
-                  {% block navbar %}{% endblock %}
+                  {% if user.is_authenticated %}
+                  <div class="ml-auto">
+                    <li class="nav-item">
+                      <a href="{% url 'logout' %}" class="nav-link">Log Out</a>
+                    </li>
+                  </div>
+                 {% else %}
+                  <div class="ml-auto">
+                  <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link">Log In</a>
+                  </li>
+                  {% endif %}
+                  </div>
                 </li>
               </ul>
             </div>

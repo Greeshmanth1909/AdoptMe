@@ -12,7 +12,7 @@
         {% if message.sender == user %}
             <!-- msgs form self -->
             <div>
-                <p>
+                <p style="text-align: right;">
                     {{message.message}}
                 </p>
             </div>
@@ -20,7 +20,7 @@
         {% else %}
             <!-- to the left -->
             <div>
-                <h1>
+                <h1 style="text-align: left;">
                     {{message.message}}
                 </h1>
             </div>
