@@ -2,12 +2,37 @@
 
 {% block title %}Home{% endblock %}
 
-{% block content %}
+{% block navbar %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <div class="ml-auto">
+    <li class="nav-item">
+      <a href="{% url 'logout' %}" class="nav-link">Log Out</a>
+    </li>
+  </div>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+<div class="ml-auto">
+<li class="nav-item">
+  <a href="{% url 'login' %}" class="nav-link">Log In</a>
+</li>
+</div>
 {% endif %}
 {% endblock %}
+
+
+{% block content %}
+  <h1>Welcome!</h1>
+  {% if user.is_authenticated %}
+    <h1>{{ user.get_username }}</h1>
+  {% endif %}
+  <div>
+    <p>
+      about the website
+    </p>
+  </div>
+  {% if not user.is_authenticated %}
+    <br>
+    <h2>Don't have an account?</h2>
+    <a href="/accounts/registration/" class="btn btn-outline-dark">Register</a>
+  {% endif %}
+{% endblock %}
+

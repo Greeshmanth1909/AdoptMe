@@ -2,12 +2,14 @@
 
 {% block content %}
     <h1>My Chats</h1>
+    <br>
     <!-- link to personal chat -->
-    <div>
+    <div class="list-group">
         {% for user in users %}
-            <div>
-                <a href="/chats/{{ user }}_chat/" >{{ user }}</a>
-            </div>
+            
+            <a href="/chats/{{ user }}_chat/" class="list-group-item list-group-item-action rounded badge text-bg-light">{{ user }}</a>
+            <br>
+            
         {% endfor %}
     </div>
 {% endblock %}

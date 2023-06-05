@@ -6,8 +6,10 @@ from .forms import SendMessage
 from django.contrib.auth.models import User
 from datetime import date, datetime
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def chat_view(request, *args, **kwargs):
     # chat stuff here
     context = dict()
@@ -23,6 +25,7 @@ def chat_view(request, *args, **kwargs):
 
 
 # this view handles dms.
+@login_required
 def dm_view(request, username):
 
     # get existing chats from db, if any.
