@@ -10,4 +10,25 @@
     </form>
 </div>
 
+{% if messages %}
+    <div class="mgs-area">
+        <div class="mgs-item">
+        {% for message in messages %}
+        <span {% if message.tags %} class="nav_item message-{{ message.tags }} " {% endif %}> {{ message }} </span>
+        {% endfor %}
+        </div>
+    </div>
+{% endif %}
+<!-- {% if messages %}
+    <div class="alert alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %} -->
+
+
 {% endblock %}
