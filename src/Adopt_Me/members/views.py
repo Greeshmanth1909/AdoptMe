@@ -23,7 +23,7 @@ def registration_view(request):
             user = authenticate(request, username=username, password=password)
             login(request, user)
             messages.success(request, 'Registration successful. You are now logged in.')
-            return redirect('home')
+            return redirect('/')
         else:
             messages.error(request, 'Registration failed. Please correct the errors.')
     else:
