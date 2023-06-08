@@ -20,18 +20,26 @@
 
 
 {% block content %}
-  <h1>Welcome!</h1>
+  <h1>Hello!</h1>
+  <p>Welcome to Adopt_Me, a platform dedicated to connecting individuals who rescue animals with those who are looking to provide them
+    with a loving home. Our mission is to facilitate the adoption process by allowing users to easily upload details about animals in
+    need and specify a convenient location for adoption.</p>
+    
+    <p>With Adopt_Me, finding your perfect rescue companion is much easier. Whether you're searching for a furry friend to join your
+    family or seeking to give a rescued animal a second chance, our platform is here to assist you. Our intuitive website features an inbuilt
+    chat function, making the adoption process even more convenient.</p>
+    
+    <p>Join our community today by creating an account. As a member, you can upload information about animals available for adoption or explore
+    the profiles of rescue animals in your area. Together, we can make a difference in the lives of these deserving animals.</p>
+    
+    <p>Start your adoption journey with Adopt_Me and experience the joy of giving a rescue animal a forever home.</p>
   {% if user.is_authenticated %}
     <h1>{{ user.get_username }}</h1>
   {% endif %}
-  <div>
-    <p>
-      about the website
-    </p>
-  </div>
   {% if not user.is_authenticated %}
     <br>
     <h2>Don't have an account?</h2>
+    <br>
     <a href="/accounts/registration/" class="btn btn-outline-dark">Register</a>
   {% endif %}
 {% endblock %}
