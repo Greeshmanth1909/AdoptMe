@@ -6,7 +6,7 @@ from upload.models import upload_img
 
 @login_required
 def feed_view(request, *args, **kwargs):
-    db_objects = upload_img.objects.all()
+    db_objects = upload_img.objects.filter(adopted=False)
     context = dict()
     context['data'] = db_objects
     context['user'] = request.user
