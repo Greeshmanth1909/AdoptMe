@@ -11,6 +11,7 @@ def my_post_view(request, *args, **kwargs):
     context = dict()
     context['total_posts'] = len(post_archieve)
     context['post_archieve'] = post_archieve
+    
     return render(request, 'user_posts/user_posts.html', context)
 
 
