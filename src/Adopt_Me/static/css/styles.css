@@ -1,3 +1,11 @@
 body {
     font-family: 'Nanum Myeongjo', serif;
 }
+
+.font {
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+.txt_color{
+    background-color:#CCC;
+}

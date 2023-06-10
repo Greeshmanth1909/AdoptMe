@@ -20,22 +20,34 @@
 
 
 {% block content %}
-  <h1>Hello!</h1>
-  <p>Welcome to Adopt_Me, a platform dedicated to connecting individuals who rescue animals with those who are looking to provide them
+  <h1> 
+    {% if user.is_authenticated %}
+      Hello, {{ user.get_username }}
+    {% else %}
+      Hello!
+    {% endif %}
+  </h1>
+  {% if not user.is_authenticated %}
+    <p>Welcome to Adopt_Me, a platform dedicated to connecting individuals who rescue animals with those who are looking to provide them
     with a loving home. Our mission is to facilitate the adoption process by allowing users to easily upload details about animals in
     need and specify a convenient location for adoption.</p>
     
     <p>With Adopt_Me, finding your perfect rescue companion is much easier. Whether you're searching for a furry friend to join your
-    family or seeking to give a rescued animal a second chance, our platform is here to assist you. Our intuitive website features an inbuilt
-    chat function, making the adoption process even more convenient.</p>
+    family or seeking to give a rescued animal a second chance, our platform is here to assist you. The website features an inbuilt
+    chat function, making the adoption process a little more convenient.</p>
     
-    <p>Join our community today by creating an account. As a member, you can upload information about animals available for adoption or explore
-    the profiles of rescue animals in your area. Together, we can make a difference in the lives of these deserving animals.</p>
+    <p>Join our community today by creating an account. As a member, you can upload information about animals you have rescued and are willing to put them 
+    for adoption or explore other profiles of animals in your area. Together, we can make a difference in the lives of these deserving animals.</p>
     
     <p>Start your adoption journey with Adopt_Me and experience the joy of giving a rescue animal a forever home.</p>
-  {% if user.is_authenticated %}
-    <h1>{{ user.get_username }}</h1>
+
+  {% else %}
+
+  <p>We're thrilled to have you here. Explore our platform and discover a world of animals waiting for their forever homes.</p>
+  <p>Thank you for being a part of the community.</p>
+
   {% endif %}
+
   {% if not user.is_authenticated %}
     <br>
     <h2>Don't have an account?</h2>
