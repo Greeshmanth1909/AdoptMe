@@ -28,5 +28,5 @@ def edit_view(request, post_id):
             return redirect('/my posts/')
     else:
         form = edit_form(instance=post)
-        messages.error(request, "Please check the \"Adopted\" box if the animal has been adopted. Thank you!")
+        messages.error(request, "Please tick the \"Adopted\" checkbox only if the animal has been adopted. Note that once the \"Adopted\" checkbox has been ticked, your post will no longer appear on search. Thank you!")
         return render(request, 'post/editPost.html', {'form': form})
