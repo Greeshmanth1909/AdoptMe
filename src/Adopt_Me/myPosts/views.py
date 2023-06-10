@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from upload import models, forms
 from django.contrib.auth.decorators import login_required
+from django .contrib import messages
 
 # Create your views here.
 @login_required
@@ -11,7 +12,7 @@ def my_post_view(request, *args, **kwargs):
     context = dict()
     context['total_posts'] = len(post_archieve)
     context['post_archieve'] = post_archieve
-    
+    messages.error(request, "You can post details about your rescue animal here.")
     return render(request, 'user_posts/user_posts.html', context)
 
 

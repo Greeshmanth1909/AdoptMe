@@ -5,6 +5,10 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+            <p>Your password cannot be too similar to your other personal information.</p>
+            <p>Your password must contain at least 8 characters.</p>
+            <p>Your password cannot be a commonly used password.</p>
+            <p>Your password cannot be entirely numeric.</p>
         <button type="submit" class="btn btn-outline-dark">Register</button>
     
     </form>
