@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from upload import models, forms
 from django.contrib.auth.decorators import login_required
 from django .contrib import messages
+from .forms import edit_form
 
 # Create your views here.
 @login_required
@@ -12,7 +13,7 @@ def my_post_view(request, *args, **kwargs):
     context = dict()
     context['total_posts'] = len(post_archieve)
     context['post_archieve'] = post_archieve
-    messages.error(request, "You can post details about your rescue animal here.")
+    messages.error(request, "You can view and edit your existing posts here")
     return render(request, 'user_posts/user_posts.html', context)
 
 
@@ -21,10 +22,11 @@ def edit_view(request, post_id):
     post = get_object_or_404(models.upload_img, id=post_id)
 
     if request.method == "POST":
-        form = forms.upload_img_form(request.POST, instance=post)
+        form = edit_form(request.POST, instance=post)
         if form.is_valid():
             form.save()
             return redirect('/my posts/')
     else:
-        form = forms.upload_img_form(instance=post)
+        form = edit_form(instance=post)
+        messages.error(request, "Please check the \"Adopted\" box if the animal has been adopted. Thank you!")
         return render(request, 'post/editPost.html', {'form': form})

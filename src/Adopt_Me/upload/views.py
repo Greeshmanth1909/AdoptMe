@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import upload_img_form
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -12,6 +13,6 @@ def upload_view(request, *args, **kwargs):
         form.instance.user = request.user
         form.save()
         return render(request, 'upload/success.html', {})
-
+    messages.error(request, "You can post details about your rescue animal here.")
     context['form'] = form
     return render(request, 'upload/upload.html', context)
