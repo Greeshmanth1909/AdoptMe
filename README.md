@@ -52,4 +52,22 @@
   models and model forms.
   
   
+  ## Installation:
+  It is recommended to use a virtual environment as this project has a lot of dependencies. Once added to your local machine, follow
+  these steps:
+  
+  1. Install redis from `https://redis.io/docs/getting-started/installation/`.
+  2. Run the command `pip install redis`.
+     
+  Note that the redis server must be running for live chat to function properly.
+
+  
+
+
+
+
+
+
+
+
   
