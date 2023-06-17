@@ -1,0 +1,22 @@
+# Ignore database files
+*.db.sqlite3
+*.rdb
+
+# Ignore media files
+/media/
+
+# Ignore environment-specific settings
+/.env
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+
+# Ignore system files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*~
+.DS_Store
