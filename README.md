@@ -23,7 +23,7 @@
   This takes care of direct messages between any two users using websocket connections and channel layers.
   
   ### Data:
-  This directory has the view that handles the search page. It queries the SQLite database for uploaded images of rescue animals by       rescuers.
+  This directory has the view that handles the search page. It queries the SQLite database for uploaded images of rescue animals by        rescuers.
   
   ### Members:
   Handles user login and registration using Django's inbuilt authentication system. The `forms.py` file has a registration from class
@@ -60,14 +60,3 @@
   2. Run the command `pip install redis`.
      
   Note that the redis server must be running for live chat to function properly.
-
-  
-
-
-
-
-
-
-
-
-  
