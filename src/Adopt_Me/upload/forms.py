@@ -14,5 +14,3 @@ class upload_img_form(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 
         }
-
-
