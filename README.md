@@ -8,6 +8,10 @@
   On the other hand, there are people who have the resources and the willingness to adopt a rescue animal but just can't find one. The
   main goal of this website is to connect these people and make the adoption process as easy as possible.
   
+  ## Features:
+  Users once registered can upload pictures of an animal that they rescued, this can be seen by other users who then can connect via a 
+  personal live chat if they want to adopt the animal. See my (embarrasing) video for details.
+  
   ## Technical details:
   This is a database driven web application built on the Django Framework, it achieves some level of asynchronous functionality with
   websockets built using Django Channels and Redis.
